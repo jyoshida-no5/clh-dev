@@ -346,19 +346,23 @@ img {
   color: var(--white);
   display: flex;
   flex-direction: column;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
-  gap: 18px;
+  gap: 14px;
   height: 234px;
   justify-content: center;
-  line-height: 1.08;
+  line-height: 1.35;
   position: fixed;
   right: 0;
   text-align: center;
   top: 288px;
-  width: 51px;
-  writing-mode: vertical-rl;
+  width: 66px;
   z-index: 20;
+}
+
+.floating-cta span {
+  display: block;
+  white-space: nowrap;
 }
 
 .floating-cta::before {
