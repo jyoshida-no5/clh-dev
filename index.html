@@ -187,5 +187,18 @@
         </div>
       </section>
     </main>
+    <script>
+      (() => {
+        const cta = document.querySelector(".mobile-bottom-cta");
+        if (!cta) return;
+
+        const updateBottomCta = () => {
+          cta.classList.toggle("is-visible", window.scrollY > 40);
+        };
+
+        updateBottomCta();
+        window.addEventListener("scroll", updateBottomCta, { passive: true });
+      })();
+    </script>
   </body>
 </html>

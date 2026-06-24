@@ -83,7 +83,29 @@ img {
   font-size: 15px;
   font-weight: 700;
   line-height: 1;
+  padding-bottom: 8px;
+  position: relative;
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.2);
+}
+
+.global-nav a::after {
+  background: var(--white);
+  bottom: 0;
+  content: "";
+  height: 1px;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+  width: 100%;
+}
+
+.global-nav a:hover::after,
+.global-nav a:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
 }
 
 .header-tel {
@@ -1007,9 +1029,19 @@ img {
     grid-template-columns: repeat(3, 1fr);
     height: 50px;
     left: 0;
+    opacity: 0;
+    pointer-events: none;
     position: fixed;
     right: 0;
+    transform: translateY(100%);
+    transition: opacity 0.35s ease, transform 0.35s ease;
     z-index: 30;
+  }
+
+  .mobile-bottom-cta.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .mobile-bottom-cta a {
