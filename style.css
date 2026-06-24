@@ -156,11 +156,66 @@ img {
 }
 
 .hero-bg {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.54) 100%),
-    url("./assets/mv.jpg") center 18% / cover no-repeat;
   height: 810px;
   inset: 0 0 auto;
   position: absolute;
+}
+
+.hero-bg::before,
+.hero-bg::after {
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.hero-bg::before {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.1) 48%, rgba(0, 0, 0, 0.22) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 36%, rgba(0, 0, 0, 0.64) 100%);
+}
+
+.hero-bg::after {
+  background: linear-gradient(110deg, rgba(154, 136, 88, 0.28) 0 1px, transparent 1px 18px);
+  mix-blend-mode: soft-light;
+  opacity: 0.34;
+}
+
+.hero-slide {
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+  transform: scale(1.07);
+  transition: opacity 1.2s ease, transform 6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.hero-slide img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.hero-slide:nth-child(1) img {
+  object-position: center 18%;
+}
+
+.hero-slide:nth-child(2) img {
+  object-position: center 44%;
+}
+
+.hero-slide:nth-child(3) img {
+  object-position: center 52%;
+}
+
+.hero-slide:nth-child(4) img {
+  object-position: center 48%;
 }
 
 .hero-copy {
@@ -168,6 +223,7 @@ img {
   position: absolute;
   text-shadow: 0 0 30px rgba(0, 0, 0, 0.55);
   top: 510px;
+  z-index: 4;
 }
 
 .hero-copy h1 {
@@ -191,6 +247,48 @@ img {
   margin: 18px 0 0;
 }
 
+.hero-slider-ui {
+  align-items: center;
+  bottom: 116px;
+  color: var(--white);
+  display: grid;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 12px;
+  grid-template-columns: auto 112px auto;
+  letter-spacing: 0;
+  position: absolute;
+  right: max(40px, calc((100vw - var(--content)) / 2));
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.45);
+  z-index: 4;
+}
+
+.hero-slider-track {
+  background: rgba(255, 255, 255, 0.35);
+  height: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-slider-progress {
+  animation: heroProgress 5.2s linear infinite;
+  background: var(--white);
+  display: block;
+  height: 100%;
+  transform-origin: left;
+}
+
+@keyframes heroProgress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
 .news-strip {
   align-items: center;
   background: var(--ink);
@@ -203,6 +301,7 @@ img {
   position: absolute;
   right: 0;
   width: 50vw;
+  z-index: 5;
 }
 
 .news-strip time {
@@ -618,6 +717,18 @@ img {
     height: 700px;
   }
 
+  .hero-slide:nth-child(1) img {
+    object-position: 52% top;
+  }
+
+  .hero-slide:nth-child(2) img {
+    object-position: 46% center;
+  }
+
+  .hero-slide:nth-child(3) img {
+    object-position: 52% center;
+  }
+
   .hero-copy {
     left: 28px;
     right: 28px;
@@ -626,6 +737,12 @@ img {
 
   .hero-copy h1 {
     font-size: clamp(34px, 8vw, 48px);
+  }
+
+  .hero-slider-ui {
+    bottom: 90px;
+    grid-template-columns: auto 90px auto;
+    right: 28px;
   }
 
   .news-strip {
@@ -766,8 +883,13 @@ img {
   }
 
   .hero-bg {
-    background-position: 52% top;
     height: 470px;
+  }
+
+  .hero-bg::before {
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.36) 0%, rgba(0, 0, 0, 0.08) 64%, rgba(0, 0, 0, 0.18) 100%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.02) 28%, rgba(0, 0, 0, 0.66) 100%);
   }
 
   .hero-copy {
@@ -784,6 +906,14 @@ img {
   .hero-copy p {
     font-size: 13px;
     margin-top: 12px;
+  }
+
+  .hero-slider-ui {
+    bottom: 66px;
+    font-size: 11px;
+    gap: 8px;
+    grid-template-columns: auto 58px auto;
+    right: 25px;
   }
 
   .news-strip {

@@ -45,10 +45,30 @@
 
     <main>
       <section class="hero" aria-label="メインビジュアル">
-        <div class="hero-bg"></div>
+        <div class="hero-bg" aria-hidden="true">
+          <div class="hero-slide is-active">
+            <img src="./assets/mv.jpg" alt="" />
+          </div>
+          <div class="hero-slide">
+            <img src="./assets/concept-exterior.jpg" alt="" />
+          </div>
+          <div class="hero-slide">
+            <img src="./assets/concept-interior.jpg" alt="" />
+          </div>
+          <div class="hero-slide">
+            <img src="./assets/event-sub-2.jpg" alt="" />
+          </div>
+        </div>
         <div class="hero-copy">
           <h1><span>家族の未来</span>まで、<br />美しく守る住まい。</h1>
           <p>外壁タイルと高性能で叶える、福山・倉敷の注文住宅。</p>
+        </div>
+        <div class="hero-slider-ui" aria-hidden="true">
+          <span class="hero-slider-count">01</span>
+          <div class="hero-slider-track">
+            <span class="hero-slider-progress"></span>
+          </div>
+          <span class="hero-slider-total">04</span>
         </div>
         <a class="news-strip" href="#">
           <time datetime="2026-04-17">2026.04.17</time>
@@ -198,6 +218,33 @@
 
         updateBottomCta();
         window.addEventListener("scroll", updateBottomCta, { passive: true });
+      })();
+
+      (() => {
+        const hero = document.querySelector(".hero");
+        if (!hero) return;
+
+        const slides = [...hero.querySelectorAll(".hero-slide")];
+        const count = hero.querySelector(".hero-slider-count");
+        const progress = hero.querySelector(".hero-slider-progress");
+        if (slides.length < 2 || !count || !progress) return;
+
+        const interval = 5200;
+        let current = 0;
+
+        const showSlide = (next) => {
+          slides[current].classList.remove("is-active");
+          current = next;
+          slides[current].classList.add("is-active");
+          count.textContent = String(current + 1).padStart(2, "0");
+          progress.style.animation = "none";
+          progress.offsetHeight;
+          progress.style.animation = "";
+        };
+
+        window.setInterval(() => {
+          showSlide((current + 1) % slides.length);
+        }, interval);
       })();
     </script>
   </body>
