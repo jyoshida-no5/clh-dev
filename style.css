@@ -368,8 +368,7 @@ img {
 }
 
 .floating-cta::before {
-  flex: 0 0 auto;
-  transform: rotate(-45deg);
+  display: none;
 }
 
 .section {
